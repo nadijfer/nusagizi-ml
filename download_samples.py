@@ -14,7 +14,7 @@ HEADERS = {
 }
 
 
-def download_sample_images(output_dir: str = "samples"):
+def download_sample_images(output_dir: str = "data/samples"):
     target_dir = Path(output_dir)
     target_dir.mkdir(parents=True, exist_ok=True)
 

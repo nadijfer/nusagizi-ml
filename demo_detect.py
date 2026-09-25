@@ -18,7 +18,7 @@ def main():
     parser.add_argument(
         "--image",
         type=str,
-        default="samples/tahu_tempe.jpg",
+        default="data/samples/tahu_tempe.jpg",
         help="Path ke file gambar makanan",
     )
     parser.add_argument(
@@ -30,14 +30,14 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default="yolov8s-worldv2.pt",
-        help="YOLO-World model checkpoint (yolov8s-worldv2.pt, yolov8m-worldv2.pt)",
+        default="models/yolov8s-worldv2.pt",
+        help="YOLO-World model checkpoint (default: models/yolov8s-worldv2.pt)",
     )
     parser.add_argument(
         "--output",
         type=str,
         default=None,
-        help="Path gambar output hasil deteksi",
+        help="Path gambar output hasil deteksi (default: data/output/detected_<nama>.jpg)",
     )
 
     args = parser.parse_args()
@@ -77,7 +77,7 @@ def main():
     print("-" * 60)
 
     # Save visual result
-    output_path = args.output or f"output/detected_{image_path.stem}.jpg"
+    output_path = args.output or f"data/output/detected_{image_path.stem}.jpg"
     saved_path = detector.annotate_and_save(str(image_path), result, output_path)
     print(f"\n💾 Visualisasi gambar dengan bounding box tersimpan di:")
     print(f"   👉 {Path(saved_path).resolve()}")

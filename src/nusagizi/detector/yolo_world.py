@@ -56,15 +56,19 @@ class YOLOWorldDetector(BaseFoodDetector):
 
     def __init__(
         self,
-        model_name: str = "yolov8s-worldv2.pt",
+        model_name: Optional[str] = None,
         custom_classes: Optional[List[str]] = None,
     ):
         """Initialize YOLO-World model.
         
         Args:
-            model_name: Ultralytics YOLO-World checkpoint (e.g. 'yolov8s-worldv2.pt')
+            model_name: Ultralytics YOLO-World checkpoint (default checks 'models/yolov8s-worldv2.pt')
             custom_classes: Optional list of text class prompts.
         """
+        if model_name is None:
+            local_path = Path("models/yolov8s-worldv2.pt")
+            model_name = str(local_path) if local_path.exists() else "yolov8s-worldv2.pt"
+
         self.model_name = model_name
         self.model = YOLOWorld(model_name)
         self.classes = custom_classes or self.DEFAULT_CLASSES
